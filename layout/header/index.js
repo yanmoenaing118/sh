@@ -6,11 +6,27 @@ export default function Header() {
   const { token, mutate } = useUser();
 
   const handleLogout = async () => {
-    mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`));
+    mutate(
+      await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      })
+    );
   };
 
   const handleLogin = async () => {
-    mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`));
+    mutate(
+      await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({}),
+      })
+    );
   };
   return (
     <>
