@@ -1,9 +1,9 @@
 import { fetcher } from "../../lib/fetcher";
+
 import useUser from "../../lib/useUser";
-import { useRouter } from "next/router";
+
 export default function Header() {
   const { token, mutate } = useUser();
-  const router = useRouter();
 
   const handleLogout = async () => {
     mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`));
@@ -12,7 +12,6 @@ export default function Header() {
   const handleLogin = async () => {
     mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`));
   };
-
   return (
     <>
       <header>
