@@ -1,24 +1,30 @@
 import { fetcher } from "../../lib/fetcher";
+
 import useUser from "../../lib/useUser";
 import { useRouter } from "next/router";
+import fetchJson from "../../lib/fetchJson";
 export default function Header() {
-  const { token } = useUser();
+  const { token, mutateUser } = useUser();
   const router = useRouter();
 
   const handleLogout = async () => {
-    const result = await fetcher(
-      `${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`
+    mutateUser(
+      await fetchJson("/api/auth/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      })
     );
-
-    console.log(result);
   };
 
   const handleLogin = async () => {
-    const result = await fetcher(
-      `${process.env.NEXT_PUBLIC_APP_URL}/auth/login`
+    mutateUser(
+      await fetchJson("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      })
     );
-
-    console.log(result);
   };
 
   return (
