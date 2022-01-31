@@ -2,27 +2,15 @@ import { fetcher } from "../../lib/fetcher";
 import useUser from "../../lib/useUser";
 import { useRouter } from "next/router";
 export default function Header() {
-  const { token } = useUser();
+  const { token, mutate } = useUser();
   const router = useRouter();
 
   const handleLogout = async () => {
-    const result = await fetcher(
-      `${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`
-    );
-    if (!result.error) {
-      return router.reload();
-    }
-    console.log("error");
+    mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`));
   };
 
   const handleLogin = async () => {
-    const result = await fetcher(
-      `${process.env.NEXT_PUBLIC_APP_URL}/auth/login`
-    );
-    if (!result.error) {
-      return router.reload();
-    }
-    console.log("error");
+    mutate(await fetcher(`${process.env.NEXT_PUBLIC_APP_URL}/auth/login`));
   };
 
   return (
