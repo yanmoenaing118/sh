@@ -9,20 +9,16 @@ export default function Header() {
     const result = await fetcher(
       `${process.env.NEXT_PUBLIC_APP_URL}/auth/logout`
     );
-    if (!result.error) {
-      return router.reload();
-    }
-    console.log("error");
+
+    console.log(result);
   };
 
   const handleLogin = async () => {
     const result = await fetcher(
       `${process.env.NEXT_PUBLIC_APP_URL}/auth/login`
     );
-    if (!result.error) {
-      return router.reload();
-    }
-    console.log("error");
+
+    console.log(result);
   };
 
   return (
